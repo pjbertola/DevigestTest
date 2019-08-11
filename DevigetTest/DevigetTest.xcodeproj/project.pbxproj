@@ -13,6 +13,7 @@
 		586A2EF32300C11300AC2496 /* DevigetTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 586A2EF12300C11300AC2496 /* DevigetTest.xcdatamodeld */; };
 		586A2EF52300C11400AC2496 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 586A2EF42300C11400AC2496 /* Assets.xcassets */; };
 		586A2EF82300C11400AC2496 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 586A2EF62300C11400AC2496 /* LaunchScreen.storyboard */; };
+		586A2F002300C1F200AC2496 /* RedditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A2EFF2300C1F200AC2496 /* RedditCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		586A2EF42300C11400AC2496 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		586A2EF72300C11400AC2496 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		586A2EF92300C11400AC2496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		586A2EFF2300C1F200AC2496 /* RedditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				586A2EEA2300C11300AC2496 /* AppDelegate.swift */,
 				586A2EEC2300C11300AC2496 /* ViewController.swift */,
+				586A2EFF2300C1F200AC2496 /* RedditCell.swift */,
 				586A2EEE2300C11300AC2496 /* Main.storyboard */,
 				586A2EF42300C11400AC2496 /* Assets.xcassets */,
 				586A2EF62300C11400AC2496 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				586A2EF32300C11300AC2496 /* DevigetTest.xcdatamodeld in Sources */,
 				586A2EED2300C11300AC2496 /* ViewController.swift in Sources */,
 				586A2EEB2300C11300AC2496 /* AppDelegate.swift in Sources */,
+				586A2F002300C1F200AC2496 /* RedditCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
