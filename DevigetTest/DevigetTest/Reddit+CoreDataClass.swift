@@ -2,7 +2,7 @@
 //  Reddit+CoreDataClass.swift
 //  DevigetTest
 //
-//  Created by Pablo Javier Bertola on 11/08/2019.
+//  Created by Pablo Javier Bertola on 12/08/2019.
 //  Copyright © 2019 Pablo Javier Bertola. All rights reserved.
 //
 //
