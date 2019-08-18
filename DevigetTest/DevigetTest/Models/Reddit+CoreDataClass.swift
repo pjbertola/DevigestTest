@@ -12,5 +12,9 @@ import CoreData
 
 @objc(Reddit)
 public class Reddit: NSManagedObject {
-
+    func setUp(fromJson json: [String: Any]?) {
+        guard let _ = json else {
+            return
+        }
+    }
 }

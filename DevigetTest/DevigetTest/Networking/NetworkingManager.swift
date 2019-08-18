@@ -58,13 +58,14 @@ class NetworkingManager {
                 do {
                     let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
 
-                    print("success)")
+                    print("success")
                     successHandler(json)
 
             } catch {
-                print(error)
-                errorHandler(error)
-
+                DispatchQueue.main.async {
+                    print(error)
+                    errorHandler(error)
+                }
             }
         }
         task.resume()
