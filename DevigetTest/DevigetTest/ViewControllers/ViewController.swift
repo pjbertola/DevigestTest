@@ -14,12 +14,14 @@ class ViewController: UIViewController {
 //    Properties
     var managedContext: NSManagedObjectContext?
     var entryList: [Reddit]?
+    var presenter: RedditPresenter?
     @IBOutlet weak var tableView: UITableView!
     
 //    Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        presenter = RedditPresenter()
+        presenter?.delegate = self
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -33,10 +35,10 @@ class ViewController: UIViewController {
         } catch {
             fatalError("Failed to fetch: \(error)")
         }
-        if entryList?.isEmpty ?? false {
-            //reloadData
+        if entryList?.isEmpty ?? true {
+            presenter?.getEntries(limit: 50, before: nil, after: nil)
         }else{
-            //call service
+            self.tableView.reloadData()
         }
     }
 
@@ -76,8 +78,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             if let reddit = entryList?[indexPath.row] {
                 cell.setUp(with: reddit)
             }
+            cell.delegate = self
         }
         return tableViewCell ?? UITableViewCell()
+    }
+    
+    
+}
+extension ViewController: RedditPresenterDelegate {
+    func handleEntries(entries: [Reddit], before: String?, after: String?) {
+        if entryList == nil {
+            entryList = [Reddit]()
+        }
+        entryList?.append(contentsOf: entries)
+        self.tableView.reloadData()
+    }
+    
+    func handleError(error: Error) {
+        print(error)
+    }
+    
+    
+}
+extension ViewController: RedditCellDelegate {
+    func dismiss(entry: Reddit) {
+        //        todo: delete entry
     }
     
     

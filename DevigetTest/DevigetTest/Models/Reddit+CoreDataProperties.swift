@@ -23,5 +23,5 @@ extension Reddit {
     @NSManaged public var title: String?
     @NSManaged public var unSeen: Bool
     @NSManaged public var urlImg: String?
-
+    //todo: add entryId "id" String
 }

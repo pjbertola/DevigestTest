@@ -14,7 +14,7 @@ class RedditPresenter  {
     var delegate: RedditPresenterDelegate?
     
     
-    func getEntries(limit: String?,
+    func getEntries(limit: Int?,
                     before: String?,
                     after: String?) {
         NetworkingManager.shared.getTopReddit(limit: limit, before: before, after: after, successHandler: { (jsonDic) in

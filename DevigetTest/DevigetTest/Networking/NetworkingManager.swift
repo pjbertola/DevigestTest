@@ -22,7 +22,7 @@ class NetworkingManager {
     fileprivate init() { }
 
         
-    func getTopReddit(limit: String?,
+    func getTopReddit(limit: Int?,
                       before: String?,
                       after: String?,
                       successHandler: @escaping SuccessHandler,

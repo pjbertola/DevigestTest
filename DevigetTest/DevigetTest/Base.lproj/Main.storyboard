@@ -18,15 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w9U-t2-qCD">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="185" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w9U-t2-qCD">
                                 <rect key="frame" x="0.0" y="5" width="414" height="827"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="183" id="R0p-rn-C10" customClass="RedditCell" customModule="DevigetTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="183"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RedditCell" rowHeight="185" id="R0p-rn-C10" customClass="RedditCell" customModule="DevigetTest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="185"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R0p-rn-C10" id="SE5-xQ-6eB">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="182.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="184.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rav-b4-7V7" userLabel="unreadView">
@@ -60,11 +60,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dca-Hy-dDa">
-                                                    <rect key="frame" x="6" y="148" width="54" height="30"/>
+                                                    <rect key="frame" x="6" y="148" width="54" height="32"/>
                                                     <state key="normal" title="Dismiss"/>
+                                                    <connections>
+                                                        <action selector="tapDismiss:" destination="R0p-rn-C10" eventType="touchUpInside" id="TuM-5O-k2W"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjX-zD-P2b">
-                                                    <rect key="frame" x="310.5" y="153" width="83.5" height="21"/>
+                                                    <rect key="frame" x="310.5" y="155" width="83.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -99,6 +102,13 @@
                                             <constraint firstItem="dca-Hy-dDa" firstAttribute="leading" secondItem="R0p-rn-C10" secondAttribute="leading" constant="6" id="vwV-55-ls0"/>
                                             <constraint firstAttribute="bottom" secondItem="dca-Hy-dDa" secondAttribute="bottom" constant="5" id="wQO-5B-AVn"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="commentsLb" destination="yjX-zD-P2b" id="W6x-N3-h6K"/>
+                                            <outlet property="descriptionLb" destination="eib-K3-CZc" id="ckG-9b-869"/>
+                                            <outlet property="imgView" destination="3Lf-he-QHu" id="vw8-75-xap"/>
+                                            <outlet property="timeLb" destination="c5C-QU-u6g" id="z4p-9r-Ia7"/>
+                                            <outlet property="titleLb" destination="4It-r2-N9d" id="r2K-x2-Oam"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

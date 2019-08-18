@@ -25,6 +25,5 @@ public class Reddit: NSManagedObject {
         if let value = dto["created"] as? Int64 {
             self.date = NSDate(timeIntervalSince1970: TimeInterval(value))
         }
-
     }
 }
