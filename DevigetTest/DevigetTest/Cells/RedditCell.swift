@@ -11,4 +11,7 @@ import UIKit
 
 class RedditCell: UITableViewCell{
     
+    func setUp(with entry: Reddit)  {
+        
+    }
 }
