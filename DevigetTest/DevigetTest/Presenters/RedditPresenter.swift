@@ -40,7 +40,7 @@ class RedditPresenter  {
                     redditList.append(reddit)
                 }
                 DispatchQueue.main.async {
-                    self.delegate?.getEntries(entries: redditList, before: newBefore, after: newAfter)
+                    self.delegate?.handleEntries(entries: redditList, before: newBefore, after: newAfter)
                 }
             }
             
@@ -54,7 +54,7 @@ class RedditPresenter  {
 
 protocol RedditPresenterDelegate {
     
-    func getEntries(entries: [Reddit], before: String?, after: String?)
+    func handleEntries(entries: [Reddit], before: String?, after: String?)
     
     func handleError(error: Error)
     
