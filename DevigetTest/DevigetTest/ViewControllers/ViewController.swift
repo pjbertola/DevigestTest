@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var managedContext: NSManagedObjectContext?
     var entryList: [Reddit]?
     var presenter: RedditPresenter?
+    var appDelegate: AppDelegate?
     @IBOutlet weak var tableView: UITableView!
     
 //    Methods
@@ -22,16 +23,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         presenter = RedditPresenter()
         presenter?.delegate = self
-        guard let appDelegate =
+        guard let appDel =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
         }
-        managedContext = appDelegate.persistentContainer.viewContext
+        appDelegate = appDel
+        managedContext = appDelegate?.persistentContainer.viewContext
         let entriesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Reddit")
         
         do {
             entryList = try managedContext!.fetch(entriesFetch) as? [Reddit]
-            print("entry list")
         } catch {
             fatalError("Failed to fetch: \(error)")
         }
@@ -58,7 +59,7 @@ class ViewController: UIViewController {
             fatalError("Failed to fetch: \(error)")
         }
         
-
+        appDelegate?.saveContext()
     }
     
 }
@@ -102,7 +103,8 @@ extension ViewController: RedditPresenterDelegate {
 }
 extension ViewController: RedditCellDelegate {
     func dismiss(entry: Reddit) {
-        //        todo: delete entry
+        deleteAll()
+        tableView.reloadData()
     }
     
     

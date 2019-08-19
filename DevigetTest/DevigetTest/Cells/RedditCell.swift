@@ -21,16 +21,16 @@ class RedditCell: UITableViewCell{
     
     func setUp(with entry: Reddit)  {
         reddit = entry
-        self.timeLb.text = entry.title
+        self.titleLb.text = entry.title
         self.descriptionLb.text = entry.desc
         self.commentsLb.text = NSLocalizedString("Comments: ", comment: "") + String(entry.comments)
         
         
-        if let dateRangeEnd = entry.date as Date? {
-            let dateRangeStart = Date()
-            let components = Calendar.current.dateComponents([.weekOfYear, .month], from: dateRangeStart, to: dateRangeEnd )
+        if let dateRangeStart = entry.date as Date? {
+            let dateRangeEnd = Date()
+            let components = Calendar.current.dateComponents([.hour], from: dateRangeStart, to: dateRangeEnd )
             
-            print("difference is \(components.hour ?? 0) hours")
+            print("difference is \(components.hour ?? 0) hour")
 
             self.timeLb.text = String(components.hour ?? 0) + NSLocalizedString(" hours ago.", comment: "")
         }

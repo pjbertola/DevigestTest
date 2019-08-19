@@ -17,17 +17,18 @@ class RedditPresenter  {
     func getEntries(limit: Int?,
                     before: String?,
                     after: String?) {
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
         NetworkingManager.shared.getTopReddit(limit: limit, before: before, after: after, successHandler: { (jsonDic) in
             
             let dataD = jsonDic?["data"] as? [String: Any]
             let newBefore = dataD?["before"] as? String
             let newAfter = dataD?["after"]  as? String
             if let children = dataD?["children"] as? [[String: Any]] {
-                guard let appDelegate =
-                    UIApplication.shared.delegate as? AppDelegate else {
-                        return
-                }
-                let managedContext = appDelegate.persistentContainer.viewContext
+
                 var redditList = [Reddit]()
                 for entryDto in children {
                     let entryData = entryDto ["data"] as?  [String: Any]
@@ -40,6 +41,7 @@ class RedditPresenter  {
                     redditList.append(reddit)
                 }
                 DispatchQueue.main.async {
+                    appDelegate.saveContext()
                     self.delegate?.handleEntries(entries: redditList, before: newBefore, after: newAfter)
                 }
             }
