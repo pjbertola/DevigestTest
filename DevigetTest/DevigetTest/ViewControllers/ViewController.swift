@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     var appDelegate: AppDelegate?
     private let refreshControl = UIRefreshControl()
     private let pageLimit = 10
+    private var isFetchingMore = false
+    private var after: String?
     @IBOutlet weak var tableView: UITableView!
     
 //    Methods
@@ -25,6 +27,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         presenter = RedditPresenter()
         presenter?.delegate = self
+        
         // Configure Refresh Control
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshEntries(_:)), for: .valueChanged)
@@ -44,6 +47,7 @@ class ViewController: UIViewController {
         }
         if entryList?.isEmpty ?? true {
             presenter?.getEntries(limit: pageLimit, before: nil, after: nil)
+            
         }else{
             self.tableView.reloadData()
         }
@@ -51,7 +55,8 @@ class ViewController: UIViewController {
 
     @IBAction func tapDismissAll(_ sender: Any) {
         deleteAll()
-        self.entryList = nil
+        entryList = nil
+        after = nil
         self.tableView.reloadData()
     }
     
@@ -71,6 +76,22 @@ class ViewController: UIViewController {
     @objc private func refreshEntries(_ sender: Any) {
         tapDismissAll(sender)
         presenter?.getEntries(limit: pageLimit, before: nil, after: nil)
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        // "* 2" is there to load before the end.
+        if offSetY > contentHeight - scrollView.frame.height * 2 {
+            if !isFetchingMore {
+                fetchingMore()
+            }
+        }
+    }
+    func fetchingMore() {
+        isFetchingMore = true
+        presenter?.getEntries(limit: pageLimit, before: nil, after: after)
     }
 }
 
@@ -101,9 +122,18 @@ extension ViewController: RedditPresenterDelegate {
         if entryList == nil {
             entryList = [Reddit]()
         }
+        let initialCount = entryList?.count ?? 0
         entryList?.append(contentsOf: entries)
-        self.tableView.reloadData()
+        self.after = after
+        isFetchingMore = false
+        var indexList = [IndexPath]()
+        for i in initialCount...(entryList!.count - 1){
+            indexList.append(IndexPath(row: i, section: 0))
+        }
         self.refreshControl.endRefreshing()
+        self.tableView.beginUpdates()
+        self.tableView.insertRows(at: indexList, with: .automatic)
+        self.tableView.endUpdates()
     }
     
     func handleError(error: Error) {
