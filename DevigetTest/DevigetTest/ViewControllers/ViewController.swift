@@ -22,12 +22,13 @@ class ViewController: UIViewController {
     private var after: String?
     @IBOutlet weak var tableView: UITableView!
     
+    
 //    Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = RedditPresenter()
         presenter?.delegate = self
-        
+
         // Configure Refresh Control
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshEntries(_:)), for: .valueChanged)
@@ -93,6 +94,17 @@ class ViewController: UIViewController {
         isFetchingMore = true
         presenter?.getEntries(limit: pageLimit, before: nil, after: after)
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailsSegue" {
+            if let nav = segue.destination as? UINavigationController {
+                if let vc = nav.viewControllers.first as? DetailsViewController {
+                    if let reddit = sender as? Reddit {
+                        vc.reddit = reddit
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -114,7 +126,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return tableViewCell ?? UITableViewCell()
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let reddit = entryList?[indexPath.row] {
+            if reddit.newEntry {
+                reddit.newEntry = false
+                appDelegate?.saveContext()
+            }
+            performSegue(withIdentifier: "DetailsSegue", sender: reddit)
+        }
+    }
     
 }
 extension ViewController: RedditPresenterDelegate {

@@ -22,9 +22,21 @@ public class Reddit: NSManagedObject {
         
         self.comments = dto["num_comments"] as? Int64 ?? 0
         self.title = dto["subreddit"] as? String
-        self.unSeen = false
+        self.unSeen = true
         if let value = dto["created"] as? Int64 {
             self.date = NSDate(timeIntervalSince1970: TimeInterval(value))
         }
+    }
+    var seenHandler: ((Bool) -> Void)?
+    
+    var newEntry: Bool {
+        set(newValue){
+            self.unSeen = newValue
+            seenHandler?(newValue)
+        }
+        get {
+            return self.unSeen
+        }
+
     }
 }

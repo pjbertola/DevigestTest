@@ -17,7 +17,12 @@ class RedditCell: UITableViewCell{
     @IBOutlet weak var descriptionLb: UILabel!
     @IBOutlet weak var commentsLb: UILabel!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var unReadView: UIView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        unReadView.layer.cornerRadius = unReadView.frame.width * 0.5
+    }
     
     func setUp(with entry: Reddit)  {
         reddit = entry
@@ -29,14 +34,17 @@ class RedditCell: UITableViewCell{
         if let dateRangeStart = entry.date as Date? {
             let dateRangeEnd = Date()
             let components = Calendar.current.dateComponents([.hour], from: dateRangeStart, to: dateRangeEnd )
-            
-            print("difference is \(components.hour ?? 0) hour")
 
             self.timeLb.text = String(components.hour ?? 0) + NSLocalizedString(" hours ago.", comment: "")
         }
         if let imgUrl = URL(string: entry.urlImg ?? "") {
             self.imgView.load(url: imgUrl)
         }
+        unReadView.isHidden = !entry.newEntry
+        self.reddit?.seenHandler = { newValue in
+            self.unReadView.isHidden = !newValue
+        }
+        
     }
     
     @IBAction func tapDismiss(_ sender: Any) {
@@ -44,6 +52,11 @@ class RedditCell: UITableViewCell{
             delegate?.dismiss(entry: entry)
         }
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        reddit?.seenHandler = nil
+    }
+
 }
 
 protocol RedditCellDelegate {

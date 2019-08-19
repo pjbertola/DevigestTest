@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5838CD9A2309DACB00C6AAC2 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5838CD992309DACB00C6AAC2 /* NetworkingManager.swift */; };
 		5838CD9E2309EC2600C6AAC2 /* RedditPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5838CD9D2309EC2600C6AAC2 /* RedditPresenter.swift */; };
+		5838CDA0230A743400C6AAC2 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5838CD9F230A743400C6AAC2 /* DetailsViewController.swift */; };
 		586A2EEB2300C11300AC2496 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A2EEA2300C11300AC2496 /* AppDelegate.swift */; };
 		586A2EED2300C11300AC2496 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586A2EEC2300C11300AC2496 /* ViewController.swift */; };
 		586A2EF02300C11300AC2496 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 586A2EEE2300C11300AC2496 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		5838CD992309DACB00C6AAC2 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		5838CD9D2309EC2600C6AAC2 /* RedditPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPresenter.swift; sourceTree = "<group>"; };
+		5838CD9F230A743400C6AAC2 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		586A2EE72300C11300AC2496 /* DevigetTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevigetTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		586A2EEA2300C11300AC2496 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		586A2EEC2300C11300AC2496 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				586A2EEC2300C11300AC2496 /* ViewController.swift */,
+				5838CD9F230A743400C6AAC2 /* DetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			files = (
 				586A2EF32300C11300AC2496 /* DevigetTest.xcdatamodeld in Sources */,
 				58C4939323011685005DBAC5 /* Reddit+CoreDataClass.swift in Sources */,
+				5838CDA0230A743400C6AAC2 /* DetailsViewController.swift in Sources */,
 				586A2EED2300C11300AC2496 /* ViewController.swift in Sources */,
 				586A2EEB2300C11300AC2496 /* AppDelegate.swift in Sources */,
 				5838CD9E2309EC2600C6AAC2 /* RedditPresenter.swift in Sources */,
