@@ -17,11 +17,12 @@ extension Reddit {
         return NSFetchRequest<Reddit>(entityName: "Reddit")
     }
 
+    @NSManaged public var entryId: String?
     @NSManaged public var comments: Int64
     @NSManaged public var date: NSDate?
     @NSManaged public var desc: String?
     @NSManaged public var title: String?
     @NSManaged public var unSeen: Bool
     @NSManaged public var urlImg: String?
-    //todo: add entryId "id" String
+    
 }

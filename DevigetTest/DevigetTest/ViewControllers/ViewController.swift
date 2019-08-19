@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     var entryList: [Reddit]?
     var presenter: RedditPresenter?
     var appDelegate: AppDelegate?
+    private let refreshControl = UIRefreshControl()
+    private let pageLimit = 10
     @IBOutlet weak var tableView: UITableView!
     
 //    Methods
@@ -23,6 +25,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         presenter = RedditPresenter()
         presenter?.delegate = self
+        // Configure Refresh Control
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshEntries(_:)), for: .valueChanged)
+        
         guard let appDel =
             UIApplication.shared.delegate as? AppDelegate else {
                 return
@@ -37,7 +43,7 @@ class ViewController: UIViewController {
             fatalError("Failed to fetch: \(error)")
         }
         if entryList?.isEmpty ?? true {
-            presenter?.getEntries(limit: 50, before: nil, after: nil)
+            presenter?.getEntries(limit: pageLimit, before: nil, after: nil)
         }else{
             self.tableView.reloadData()
         }
@@ -62,6 +68,10 @@ class ViewController: UIViewController {
         appDelegate?.saveContext()
     }
     
+    @objc private func refreshEntries(_ sender: Any) {
+        tapDismissAll(sender)
+        presenter?.getEntries(limit: pageLimit, before: nil, after: nil)
+    }
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -93,6 +103,7 @@ extension ViewController: RedditPresenterDelegate {
         }
         entryList?.append(contentsOf: entries)
         self.tableView.reloadData()
+        self.refreshControl.endRefreshing()
     }
     
     func handleError(error: Error) {
@@ -103,8 +114,14 @@ extension ViewController: RedditPresenterDelegate {
 }
 extension ViewController: RedditCellDelegate {
     func dismiss(entry: Reddit) {
-        deleteAll()
-        tableView.reloadData()
+
+        if let index = entryList!.firstIndex(of: entry) {
+            print("dismiss index: \(index)")
+            entryList?.remove(at: index)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
+            tableView.endUpdates()
+        }
     }
     
     

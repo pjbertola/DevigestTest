@@ -16,6 +16,7 @@ public class Reddit: NSManagedObject {
         guard let dto = json else {
             return
         }
+        self.entryId = dto["id"] as? String
         self.desc = dto["title"] as? String
         self.urlImg = dto["thumbnail"] as? String
         
