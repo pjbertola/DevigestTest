@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         presenter = RedditPresenter()
         presenter?.delegate = self
-
+        tableView.rowHeight = UITableView.automaticDimension
         // Configure Refresh Control
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshEntries(_:)), for: .valueChanged)
