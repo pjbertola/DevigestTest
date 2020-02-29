@@ -13,6 +13,8 @@ class DetailsViewController: UIViewController {
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var detailLb: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var reddit: Reddit?
     
     override func viewDidLoad() {
@@ -22,5 +24,10 @@ class DetailsViewController: UIViewController {
         if let imgUrl = URL(string: reddit?.urlImg ?? "") {
             self.imgView.load(url: imgUrl)
         }
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        scrollView.layoutIfNeeded()
     }
 }
