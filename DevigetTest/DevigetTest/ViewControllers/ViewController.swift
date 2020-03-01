@@ -127,6 +127,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return tableViewCell ?? UITableViewCell()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if let reddit = entryList?[indexPath.row] {
             if reddit.newEntry {
                 reddit.newEntry = false
